@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71332c0f62bc6b42b733b1d7dac1b16, type: 3}
+  m_Name: Hellwalker_SO 3
+  m_EditorClassIdentifier: 
+  W_Sprite: {fileID: 0}
+  shootSounds: []
+  reloadSounds: []
+  W_Obj: {fileID: 0}
+  W_Effect: 
+  W_Name: 
+  W_ID: 0
+  W_Spread: 0
+  W_Range: 0
+  W_DMG: 0
+  W_Reload_Speed: 0
+  W_TBShots: 0
+  W_TBShooting: 0
+  W_BPT: 0
+  Ammo_Added: 0
+  W_Ammo_Mag: 0
+  W_Ammo_Capacity: 0
+  FullAutoToggle: 0
+  ShootForce: 0
+  UpwardForce: 0
+  RecoilForce: 0
