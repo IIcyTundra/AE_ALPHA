@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71332c0f62bc6b42b733b1d7dac1b16, type: 3}
+  m_Script: {fileID: 11500000, guid: 47c5df4a7d81afa4badfcb227fa67eaa, type: 3}
   m_Name: COREASMG_SO
   m_EditorClassIdentifier: 
   W_Sprite: {fileID: 0}

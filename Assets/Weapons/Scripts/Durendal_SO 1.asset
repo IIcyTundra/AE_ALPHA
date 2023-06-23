@@ -9,28 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71332c0f62bc6b42b733b1d7dac1b16, type: 3}
+  m_Script: {fileID: 11500000, guid: 47c5df4a7d81afa4badfcb227fa67eaa, type: 3}
   m_Name: Durendal_SO 1
   m_EditorClassIdentifier: 
   W_Sprite: {fileID: 0}
   shootSounds: []
   reloadSounds: []
   W_Obj: {fileID: 0}
-  W_Bullet: {fileID: 578721171110774508, guid: 1b8b7dafd9f30734fa11fdbd2110fbfd, type: 3}
   W_Effect: 
   W_Name: 
   W_ID: 0
   W_Spread: 0
-  W_Range: 100
-  W_DMG: 100
+  W_Range: 0
+  W_DMG: 0
   W_Reload_Speed: 0
-  W_TBShots: 1
+  W_TBShots: 0
   W_TBShooting: 0
-  W_BPT: 1
+  W_BPT: 0
   Ammo_Added: 0
-  W_Ammo_Mag: 99999
-  W_Ammo_Capacity: 99999
+  W_Ammo_Mag: 0
+  W_Ammo_Capacity: 0
   FullAutoToggle: 0
-  ShootForce: 100
+  ShootForce: 0
   UpwardForce: 0
   RecoilForce: 0
