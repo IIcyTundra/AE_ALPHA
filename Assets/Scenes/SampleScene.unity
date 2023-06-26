@@ -254,6 +254,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Q3Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6416710336194280892, guid: 3b3f81e9c20de53498e204a8ec694e03,
+        type: 3}
+      propertyPath: m_Friction
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6416710336194280896, guid: 3b3f81e9c20de53498e204a8ec694e03,
         type: 3}
       propertyPath: m_RootOrder
@@ -317,8 +322,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5788945019925473168, guid: 3b3f81e9c20de53498e204a8ec694e03,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 434349764}
   m_SourcePrefab: {fileID: 100100000, guid: 3b3f81e9c20de53498e204a8ec694e03, type: 3}
+--- !u!1 &434349763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5788945019925473168, guid: 3b3f81e9c20de53498e204a8ec694e03,
+    type: 3}
+  m_PrefabInstance: {fileID: 434349762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &434349764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434349763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215ddc39088dbd54fad17b5428d44246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magSize: 100
+  rateOfFire: 1
+  bulletsPerShot: 1
+  W_Ref: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +608,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43820
+  m_Name: pb_Mesh33960
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

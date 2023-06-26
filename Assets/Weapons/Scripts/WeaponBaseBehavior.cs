@@ -86,7 +86,6 @@ public class WeaponBaseBehavior : MonoBehaviour
 
         weaponProjectile.GetComponent<Rigidbody>().velocity = weaponSpread.normalized * W_Ref.ShootForce;
         weaponProjectile.GetComponent<Rigidbody>().AddForce(WeaponCam.transform.up * W_Ref.UpwardForce, ForceMode.Impulse);
-        
 
     }
 
