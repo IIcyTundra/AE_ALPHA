@@ -12,14 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71332c0f62bc6b42b733b1d7dac1b16, type: 3}
   m_Name: Weapon_Info
   m_EditorClassIdentifier: 
-  W_Sprite: {fileID: 0}
-  shootSounds: []
-  reloadSounds: []
-  W_Obj: {fileID: 0}
-  W_Effect: 
-  W_Name: 
-  W_ID: 0
-  W_Spread: 0
+  W_Spread: {x: 0.1, y: 0.1, z: 0.1}
   W_Range: 0
   W_DMG: 0
   W_Reload_Speed: 0
@@ -30,6 +23,6 @@ MonoBehaviour:
   W_Ammo_Mag: 0
   W_Ammo_Capacity: 0
   FullAutoToggle: 0
-  ShootForce: 0
+  ShootForce: 100
   UpwardForce: 0
   RecoilForce: 0

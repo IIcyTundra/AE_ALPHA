@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class WeaponBaseBehavior : MonoBehaviour
 {
+
     [SerializeField] protected int magSize;
     [SerializeField] protected float rateOfFire;
     [SerializeField] protected int bulletsPerShot;
-    [SerializeField] protected Weapon_SO W_Ref;
+    //[SerializeField] protected Weapon_SO W_Ref;
+    [SerializeField] protected GameObject weaponDir;
     
     protected int bulletsLeft;
     protected bool _nextShotReady;
@@ -15,9 +17,8 @@ public class WeaponBaseBehavior : MonoBehaviour
 
     Camera WeaponCam;
     GameObject weaponProjectile;
-    RaycastHit Hit;
-    Vector3 weaponSpread;
     Vector3 targetPoint;
+    Vector3 weaponSpread;
     
 
 
@@ -26,17 +27,17 @@ public class WeaponBaseBehavior : MonoBehaviour
     {
         bulletsLeft = magSize;
         _nextShotReady = true;
-        WeaponCam = GetComponentInParent<Camera>();
+        WeaponCam = GameObject.Find("WeaponCamera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        RaycastTrack();
+        
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             Shoot();
-            
+            RaycastCheck();
         }
         
     }
@@ -45,7 +46,6 @@ public class WeaponBaseBehavior : MonoBehaviour
     {
             if(bulletsLeft != 0 && _nextShotReady == true)
             {
-                CallBullet();
                 ///Instantiate(W_Ref.ImpactEffect.GetComponent<ParticleSystem>(), Hit.transform.position, Hit.transform.rotation);
                 bulletsLeft--;
                 _nextShotReady = false;
@@ -60,15 +60,34 @@ public class WeaponBaseBehavior : MonoBehaviour
         Debug.Log("Next shot ready!");
     }
 
-    public virtual void RaycastTrack()
+    public virtual void RaycastCheck()
     {
-        
-        if (Physics.Raycast(WeaponCam.transform.position, WeaponCam.transform.forward, out Hit))
+        RaycastHit Hit;
+
+        Ray ray = WeaponCam.ViewportPointToRay(new Vector3(0.5f,0.5f,0));
+
+        if (Physics.Raycast(ray, out Hit))
             targetPoint = Hit.point;
         else
             targetPoint = WeaponCam.transform.position + WeaponCam.transform.forward * 75;
 
-        weaponSpread = WeaponCalcUtil.RandomSpread(targetPoint,WeaponCam,W_Ref.W_Spread);
+        Vector3  dirWithoutSpread = targetPoint - weaponDir.transform.forward;
+
+        weaponSpread = dirWithoutSpread;
+        Debug.Log("Og Target = " + targetPoint);
+        Debug.Log("Weapon Dir = " + weaponDir.transform.forward);
+        Debug.Log("Dir no Spread = " + dirWithoutSpread);
+        Debug.Log("Weapon Spread = " + weaponSpread);
+
+        
+        CallBullet();
+        weaponProjectile.transform.forward = weaponSpread;
+        weaponProjectile.transform.parent = null;
+
+        Debug.Log("Bullet Direction = " +  weaponProjectile.transform.forward);
+
+        weaponProjectile.GetComponent<Rigidbody>().AddForce(weaponSpread * 200, ForceMode.Force);
+        //weaponProjectile.GetComponent<Rigidbody>().AddForce(weaponDir.transform.up * 0, ForceMode.Impulse);
 
     }
 
@@ -81,12 +100,7 @@ public class WeaponBaseBehavior : MonoBehaviour
             weaponProjectile.SetActive(true);
         }
 
-        weaponProjectile.transform.forward = weaponSpread.normalized;
-        weaponProjectile.transform.parent = null;
-
-        weaponProjectile.GetComponent<Rigidbody>().velocity = weaponSpread.normalized * W_Ref.ShootForce;
-        weaponProjectile.GetComponent<Rigidbody>().AddForce(WeaponCam.transform.up * W_Ref.UpwardForce, ForceMode.Impulse);
-
+        
     }
 
 
