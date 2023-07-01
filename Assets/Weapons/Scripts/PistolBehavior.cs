@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PistolBehavior : WeaponBaseBehavior
 {
-    public override void Shoot()
+    protected override void Shoot()
     {
         base.Shoot();
     }
