@@ -572,8 +572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magSize: 999
-  rateOfFire: 0
-  bulletsPerShot: 1
   ShootConfig: {fileID: 11400000, guid: 40dc57b975358784aa73aafbc505c198, type: 2}
   TrailConfig: {fileID: 11400000, guid: 1668295ee9ef6a741a41e5dfbbbc5be9, type: 2}
 --- !u!1 &1559555426
@@ -785,7 +783,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31638
+  m_Name: pb_Mesh31646
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

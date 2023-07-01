@@ -16,4 +16,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   Spread: {x: 0.03, y: 0.03, z: 0.03}
-  FireRate: 0.25
+  FireRate: 0.4
+  bulletsPerShot: 3
+  timeBetweenShots: 0.3
