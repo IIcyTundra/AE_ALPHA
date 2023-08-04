@@ -59,12 +59,12 @@ namespace MainCharacter
 
         /// <summary>
         /// Returns player's current speed.
+        
         /// </summary>
-
-        #region Script Variables
-
         public float Speed { get { return m_Character.velocity.magnitude; } }
-
+        
+        #region Script Variables
+        
         public CharacterController m_Character;
         private Vector3 m_MoveDirectionNorm = Vector3.zero;
         public Vector3 m_PlayerVelocity = Vector3.zero;
@@ -87,7 +87,7 @@ namespace MainCharacter
         {
             _inputReader.MoveEvent += HandleMove;
             _inputReader.JumpEvent += HandleJump;
-            _inputReader.JumpCancelledEvent += HandleCancelledJump;
+            
             m_Tran = transform;
             m_Character = GetComponent<CharacterController>();
 
@@ -125,8 +125,10 @@ namespace MainCharacter
         private void QueueJump()
         {
             if (m_AutoBunnyHop)
+            {
                 return;
-
+            }
+        
             if (!m_JumpQueued && !m_AutoBunnyHop) m_JumpQueued = true;
 
             if (m_JumpQueued) m_JumpQueued = false;
@@ -300,23 +302,9 @@ namespace MainCharacter
             m_PlayerVelocity.z += accelspeed * targetDir.z;
         }
 
-        private void HandleMove(Vector2 dir)
-        {
-            m_MoveInput = dir;
-        }
+        private void HandleMove(Vector2 dir) => m_MoveInput = dir;
 
-        private void HandleJump()
-        {
-            m_JumpQueued = true;
-        }
-        
-        private void HandleCancelledJump()
-        {
-            m_JumpQueued = false;
-        }
-
-        
-        
+        private void HandleJump() => m_JumpQueued = true;
         
     }
 }

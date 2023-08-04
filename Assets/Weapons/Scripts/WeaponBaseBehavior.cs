@@ -33,7 +33,7 @@ public class WeaponBaseBehavior : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        WeaponInputHandler();
+        //WeaponInputHandler();
     }
 
     #region Weapon Function

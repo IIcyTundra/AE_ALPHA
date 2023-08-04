@@ -393,10 +393,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6416710336194280896}
   - component: {fileID: 6416710336194280893}
+  - component: {fileID: 4123269502201271688}
   - component: {fileID: 6416710336194280892}
   - component: {fileID: 6416710336194280890}
-  - component: {fileID: 4123269502201271688}
   - component: {fileID: 8023507649745477452}
+  - component: {fileID: 5579302268816244180}
   m_Layer: 3
   m_Name: Q3Player
   m_TagString: Untagged
@@ -448,6 +449,29 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &4123269502201271688
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416710336194280889}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6416710336194280892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,10 +484,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689c7b4cc1dbae54cbfa41c0c84fb174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputReader: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
   m_Camera: {fileID: 6416710336450658139}
   m_MouseLook:
-    m_XSensitivity: 2
-    m_YSensitivity: 2
+    _inputReader: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+    m_XSensitivity: 0.1
+    m_YSensitivity: 0.1
     m_ClampVerticalRotation: 1
     m_MinimumX: -90
     m_MaximumX: 90
@@ -490,6 +516,7 @@ MonoBehaviour:
   m_Character: {fileID: 6416710336194280893}
   m_PlayerVelocity: {x: 0, y: 0, z: 0}
   m_MoveInput: {x: 0, y: 0, z: 0}
+  m_moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &6416710336194280890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,29 +530,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RefreshRate: 4
---- !u!136 &4123269502201271688
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416710336194280889}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8023507649745477452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +547,181 @@ MonoBehaviour:
   swaySmoothness: 5
   SpeedLineVFX: {fileID: 2710219574441799733}
   cameraTransform: {fileID: 537800092946835948}
+--- !u!114 &5579302268816244180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416710336194280889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 08745f80c95276347bffe17de2b86872,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a08657dc-6f02-4326-b22b-0d78d3d84098
+    m_ActionName: PlayerDefault/Jump[/Keyboard/space,/DualSenseGamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5261927a-ef58-49f4-bad9-9b5aaf76f0ab
+    m_ActionName: PlayerDefault/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualSenseGamepadHID/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnPrimaryFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: abb816ba-db6c-4765-8ee2-b462a73dead2
+    m_ActionName: PlayerDefault/Primary Fire[/Mouse/leftButton,/DualSenseGamepadHID/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnAlternateFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 97ce3298-f888-4670-9e05-1011aa631122
+    m_ActionName: PlayerDefault/Alternate Fire[/Mouse/rightButton,/DualSenseGamepadHID/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d6bb186a-27dc-48c7-8d18-12e776c7a863
+    m_ActionName: PlayerDefault/Pause[/Keyboard/escape,/DualSenseGamepadHID/select]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnSwapWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5f6d06c3-e582-4b64-94fb-dc55a4a43874
+    m_ActionName: PlayerDefault/Swap Weapon[/DualSenseGamepadHID/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnLookY
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2655a9d8-44d1-4d95-ba42-3abe3f1014fb
+    m_ActionName: PlayerDefault/LookY[/Mouse/delta/y,/DualSenseGamepadHID/rightStick/y]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnLookX
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: af419402-7881-4cd8-8371-d16b00e10b9a
+    m_ActionName: PlayerDefault/LookX[/Mouse/delta/x,/DualSenseGamepadHID/rightStick/y]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 41ec8d065e864134084d110cfecf2e2f, type: 2}
+        m_TargetAssemblyTypeName: PlayerSettings.InputReader, Assembly-CSharp
+        m_MethodName: OnResume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0ee309ec-c3fb-4d63-b3da-b1e0c58cdd96
+    m_ActionName: UI/Resume[/Keyboard/escape,/DualSenseGamepadHID/select]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerDefault
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6416710336450658135
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,20 +38,20 @@ public class Weapon_Handler : MonoBehaviour
 
     public void AddWeapon(GameObject NW)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            if(Weapons[i].gameObject != NW)
-            {
-                NW.transform.parent = gameObject.transform;
-                NW.GetComponent<BoxCollider>().enabled = false;
-                Weapons[i] = NW.transform;
-                SetWeapons();
-                Select(i);
-            }
-            else{
-                Debug.Log("AAAAAAA");
-            }
-        }
+        // for (int i = 0; i < transform.childCount; i++)
+        // {
+        //     if(Weapons[i].gameObject != NW)
+        //     {
+        //         NW.transform.parent = gameObject.transform;
+        //         NW.GetComponent<BoxCollider>().enabled = false;
+        //         Weapons[i] = NW.transform;
+        //         SetWeapons();
+        //         Select(i);
+        //     }
+        //     else{
+        //         Debug.Log("AAAAAAA");
+        //     }
+        // }
     }
 
     private void Update() {

@@ -1,4 +1,5 @@
 ﻿using System;
+using PlayerSettings;
 using UnityEngine;
 
 namespace MainCharacter
@@ -9,6 +10,7 @@ namespace MainCharacter
     [Serializable]
     public class MouseLook
     {
+        [SerializeField] private InputReader _inputReader;
         [SerializeField] private float m_XSensitivity = 2f;
         [SerializeField] private float m_YSensitivity = 2f;
         [SerializeField] private bool m_ClampVerticalRotation = true;
@@ -20,18 +22,24 @@ namespace MainCharacter
 
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
+        private float MouseX;
+        private float MouseY;
         private bool m_cursorIsLocked = true;
 
         public void Init(Transform character, Transform camera)
         {
+            _inputReader.LookXEvent += HandleLookX;
+            _inputReader.LookYEvent += HandleLookY;
+            _inputReader.PauseEvent += HandlePause;
+            _inputReader.ResumeEvent += HandleResume;
             m_CharacterTargetRot = character.localRotation;
             m_CameraTargetRot = camera.localRotation;
         }
 
         public void LookRotation(Transform character, Transform camera)
         {
-            float yRot = Input.GetAxis("Mouse X") * m_XSensitivity;
-            float xRot = Input.GetAxis("Mouse Y") * m_YSensitivity;
+            float yRot = MouseX * m_XSensitivity;
+            float xRot = MouseY * m_YSensitivity;
 
             m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
@@ -69,25 +77,13 @@ namespace MainCharacter
 
         public void UpdateCursorLock()
         {
-            //if the user set "lockCursor" we check & properly lock the cursos
-            if (m_LockCursor)
-            {
-                InternalLockUpdate();
-            }
+            //if the user set "lockCursor" we check & properly lock the cursor
+            if (m_LockCursor) InternalLockUpdate();
         }
 
         //Change below InternalLockUpdate() to work with state machine in future
         private void InternalLockUpdate()
         {
-            if (Input.GetKeyUp(KeyCode.Escape))
-            {
-                m_cursorIsLocked = false;
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                m_cursorIsLocked = true;
-            }
-
             if (m_cursorIsLocked)
             {
                 Cursor.lockState = CursorLockMode.Locked;
@@ -114,6 +110,20 @@ namespace MainCharacter
             q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
 
             return q;
+        }
+        
+        private void HandleLookX(float lookX) => MouseX = lookX;
+
+        private void HandleLookY(float lookY) => MouseY = lookY;
+
+        private void HandlePause()
+        {
+            m_cursorIsLocked = false;
+        }
+
+        private void HandleResume()
+        {
+            m_cursorIsLocked = true;
         }
     }
 }

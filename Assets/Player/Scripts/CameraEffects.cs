@@ -31,7 +31,7 @@ public class CameraEffects : MonoBehaviour
         // Debug.Log(P_Values.Speed);
     }
 
-    public void CamSway()
+    private void CamSway()
     {
         float HoriMovement = Input.GetAxisRaw("Horizontal");
         targetSwayAngle = Mathf.Clamp(HoriMovement * swayAmount, -maxSwayAngle, maxSwayAngle);
@@ -42,7 +42,7 @@ public class CameraEffects : MonoBehaviour
         //Debug.Log(cameraTransform.localRotation);
     }
 
-    public void SpeedLines()
+    private void SpeedLines()
     {
         if(PlayerSpeed >= SpeedThreshold && !_isPlaying)
         {
