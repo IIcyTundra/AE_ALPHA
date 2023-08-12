@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class WeaponBaseBehavior : MonoBehaviour
 {
-    
     protected enum WeaponState{
 
         PrimaryFire,
@@ -33,7 +32,7 @@ public class WeaponBaseBehavior : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        //WeaponInputHandler();
+        WeaponInputHandler();
     }
 
     #region Weapon Function

@@ -12,7 +12,8 @@ namespace GameManager
         private void Start()
         {
             _inputReader.PauseEvent += HandlePause;
-            _inputReader.ResumeEvent += HandleResume;
+            _inputReader.CancelEvent += HandleCancel;
+            PauseMenu.SetActive(false);
         }
 
         private void HandlePause()
@@ -20,7 +21,7 @@ namespace GameManager
             PauseMenu.SetActive(true);
         }
 
-        private void HandleResume()
+        private void HandleCancel()
         {
             PauseMenu.SetActive(false);
         }

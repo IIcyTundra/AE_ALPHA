@@ -31,7 +31,7 @@ namespace MainCharacter
             _inputReader.LookXEvent += HandleLookX;
             _inputReader.LookYEvent += HandleLookY;
             _inputReader.PauseEvent += HandlePause;
-            _inputReader.ResumeEvent += HandleResume;
+            _inputReader.CancelEvent += HandleCancel;
             m_CharacterTargetRot = character.localRotation;
             m_CameraTargetRot = camera.localRotation;
         }
@@ -65,10 +65,10 @@ namespace MainCharacter
             UpdateCursorLock();
         }
 
-        public void SetCursorLock(bool value)
+        public void SetCursorLock()
         {
-            m_LockCursor = value;
-            if (!m_LockCursor)
+           
+            if (!m_cursorIsLocked)
             {//we force unlock the cursor if the user disable the cursor locking helper
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -78,7 +78,7 @@ namespace MainCharacter
         public void UpdateCursorLock()
         {
             //if the user set "lockCursor" we check & properly lock the cursor
-            if (m_LockCursor) InternalLockUpdate();
+            if (m_cursorIsLocked) InternalLockUpdate();
         }
 
         //Change below InternalLockUpdate() to work with state machine in future
@@ -121,7 +121,7 @@ namespace MainCharacter
             m_cursorIsLocked = false;
         }
 
-        private void HandleResume()
+        private void HandleCancel()
         {
             m_cursorIsLocked = true;
         }

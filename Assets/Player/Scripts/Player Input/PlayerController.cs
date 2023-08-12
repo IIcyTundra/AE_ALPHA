@@ -128,7 +128,7 @@ namespace PlayerSettings
                 {
                     ""name"": """",
                     ""id"": ""ac823293-082a-4d6e-b187-010a8ddb6a57"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -172,7 +172,7 @@ namespace PlayerSettings
                 {
                     ""name"": """",
                     ""id"": ""d2b4d7ea-171d-4423-8402-bac049c27691"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -315,13 +315,13 @@ namespace PlayerSettings
             ]
         },
         {
-            ""name"": ""UI"",
+            ""name"": ""Pause Menu"",
             ""id"": ""2b657f21-66eb-43a0-9fd6-8a91a963aa1f"",
             ""actions"": [
                 {
-                    ""name"": ""Resume"",
+                    ""name"": ""Cancel"",
                     ""type"": ""Button"",
-                    ""id"": ""0ee309ec-c3fb-4d63-b3da-b1e0c58cdd96"",
+                    ""id"": ""7326fcfa-89cf-4bfa-8778-9ff97322d017"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -331,23 +331,12 @@ namespace PlayerSettings
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""0190dcae-1007-4995-b58c-bf732a94d807"",
+                    ""id"": ""72695ed0-077a-4d69-8cb5-21a494efd872"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Resume"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6b771dab-08f4-4402-9f8e-83ad21c0f834"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Resume"",
+                    ""groups"": ""Keyboard&Mouse;Gamepad;Touch;Joystick;XR"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -366,9 +355,9 @@ namespace PlayerSettings
             m_PlayerDefault_SwapWeapon = m_PlayerDefault.FindAction("Swap Weapon", throwIfNotFound: true);
             m_PlayerDefault_LookY = m_PlayerDefault.FindAction("LookY", throwIfNotFound: true);
             m_PlayerDefault_LookX = m_PlayerDefault.FindAction("LookX", throwIfNotFound: true);
-            // UI
-            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-            m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
+            // Pause Menu
+            m_PauseMenu = asset.FindActionMap("Pause Menu", throwIfNotFound: true);
+            m_PauseMenu_Cancel = m_PauseMenu.FindAction("Cancel", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -529,51 +518,51 @@ namespace PlayerSettings
         }
         public PlayerDefaultActions @PlayerDefault => new PlayerDefaultActions(this);
 
-        // UI
-        private readonly InputActionMap m_UI;
-        private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-        private readonly InputAction m_UI_Resume;
-        public struct UIActions
+        // Pause Menu
+        private readonly InputActionMap m_PauseMenu;
+        private List<IPauseMenuActions> m_PauseMenuActionsCallbackInterfaces = new List<IPauseMenuActions>();
+        private readonly InputAction m_PauseMenu_Cancel;
+        public struct PauseMenuActions
         {
             private @PlayerController m_Wrapper;
-            public UIActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Resume => m_Wrapper.m_UI_Resume;
-            public InputActionMap Get() { return m_Wrapper.m_UI; }
+            public PauseMenuActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Cancel => m_Wrapper.m_PauseMenu_Cancel;
+            public InputActionMap Get() { return m_Wrapper.m_PauseMenu; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
-            public void AddCallbacks(IUIActions instance)
+            public static implicit operator InputActionMap(PauseMenuActions set) { return set.Get(); }
+            public void AddCallbacks(IPauseMenuActions instance)
             {
-                if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-                @Resume.started += instance.OnResume;
-                @Resume.performed += instance.OnResume;
-                @Resume.canceled += instance.OnResume;
+                if (instance == null || m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Add(instance);
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
             }
 
-            private void UnregisterCallbacks(IUIActions instance)
+            private void UnregisterCallbacks(IPauseMenuActions instance)
             {
-                @Resume.started -= instance.OnResume;
-                @Resume.performed -= instance.OnResume;
-                @Resume.canceled -= instance.OnResume;
+                @Cancel.started -= instance.OnCancel;
+                @Cancel.performed -= instance.OnCancel;
+                @Cancel.canceled -= instance.OnCancel;
             }
 
-            public void RemoveCallbacks(IUIActions instance)
+            public void RemoveCallbacks(IPauseMenuActions instance)
             {
-                if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IUIActions instance)
+            public void SetCallbacks(IPauseMenuActions instance)
             {
-                foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_PauseMenuActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public UIActions @UI => new UIActions(this);
+        public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
         public interface IPlayerDefaultActions
         {
             void OnJump(InputAction.CallbackContext context);
@@ -585,9 +574,9 @@ namespace PlayerSettings
             void OnLookY(InputAction.CallbackContext context);
             void OnLookX(InputAction.CallbackContext context);
         }
-        public interface IUIActions
+        public interface IPauseMenuActions
         {
-            void OnResume(InputAction.CallbackContext context);
+            void OnCancel(InputAction.CallbackContext context);
         }
     }
 }

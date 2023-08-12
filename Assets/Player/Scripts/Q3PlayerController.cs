@@ -132,7 +132,6 @@ namespace MainCharacter
             if (!m_JumpQueued && !m_AutoBunnyHop) m_JumpQueued = true;
 
             if (m_JumpQueued) m_JumpQueued = false;
-
         }
 
         // Handle air movement.
@@ -262,7 +261,7 @@ namespace MainCharacter
             if (m_Character.isGrounded)
             {
                 float control = speed < m_GroundSettings.Deceleration ? m_GroundSettings.Deceleration : speed;
-                drop = control * m_Friction * Time.deltaTime * t;
+                drop = control * m_Friction * Time.deltaTime* t;
             }
 
             float newSpeed = speed - drop;
@@ -292,7 +291,7 @@ namespace MainCharacter
                 return;
             }
 
-            float accelspeed = accel * Time.deltaTime * targetSpeed;
+            float accelspeed = accel * Time.deltaTime* targetSpeed;
             if (accelspeed > addspeed)
             {
                 accelspeed = addspeed;
@@ -302,7 +301,11 @@ namespace MainCharacter
             m_PlayerVelocity.z += accelspeed * targetDir.z;
         }
 
-        private void HandleMove(Vector2 dir) => m_MoveInput = dir;
+        private void HandleMove(Vector2 dir)
+        {
+            m_MoveInput = dir;
+            //Debug.Log(m_MoveInput);
+        }
 
         private void HandleJump() => m_JumpQueued = true;
         
