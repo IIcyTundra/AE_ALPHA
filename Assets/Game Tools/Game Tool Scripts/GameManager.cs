@@ -8,22 +8,22 @@ namespace GameManager
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private InputReader _inputReader;
-        [SerializeField] private GameObject PauseMenu;
+        //[SerializeField] private GameObject PauseMenu;
         private void Start()
         {
-            _inputReader.PauseEvent += HandlePause;
-            _inputReader.CancelEvent += HandleCancel;
-            PauseMenu.SetActive(false);
+            //_inputReader.PauseEvent += HandlePause;
+            //_inputReader.CancelEvent += HandleCancel;
+            //PauseMenu.SetActive(false);
         }
 
         private void HandlePause()
         {
-            PauseMenu.SetActive(true);
+            //PauseMenu.SetActive(true);
         }
 
         private void HandleCancel()
         {
-            PauseMenu.SetActive(false);
+            //PauseMenu.SetActive(false);
         }
     }
 }

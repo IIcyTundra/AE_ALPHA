@@ -100,6 +100,15 @@ namespace PlayerSettings
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Swap Weapon Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe34ecef-f998-46ea-beb9-c7942ee89498"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -128,7 +137,7 @@ namespace PlayerSettings
                 {
                     ""name"": """",
                     ""id"": ""ac823293-082a-4d6e-b187-010a8ddb6a57"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -139,7 +148,7 @@ namespace PlayerSettings
                 {
                     ""name"": """",
                     ""id"": ""a9915da1-7530-4ac4-b075-f2501e6cc3b7"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -151,7 +160,7 @@ namespace PlayerSettings
                     ""name"": """",
                     ""id"": ""603359de-001b-41f5-8ee0-0208d2d712e8"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press,Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
@@ -311,6 +320,17 @@ namespace PlayerSettings
                     ""action"": ""LookY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b5cfb8b-df19-4232-bc49-2c0987c44bf2"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swap Weapon Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -355,6 +375,7 @@ namespace PlayerSettings
             m_PlayerDefault_SwapWeapon = m_PlayerDefault.FindAction("Swap Weapon", throwIfNotFound: true);
             m_PlayerDefault_LookY = m_PlayerDefault.FindAction("LookY", throwIfNotFound: true);
             m_PlayerDefault_LookX = m_PlayerDefault.FindAction("LookX", throwIfNotFound: true);
+            m_PlayerDefault_SwapWeaponFire = m_PlayerDefault.FindAction("Swap Weapon Fire", throwIfNotFound: true);
             // Pause Menu
             m_PauseMenu = asset.FindActionMap("Pause Menu", throwIfNotFound: true);
             m_PauseMenu_Cancel = m_PauseMenu.FindAction("Cancel", throwIfNotFound: true);
@@ -427,6 +448,7 @@ namespace PlayerSettings
         private readonly InputAction m_PlayerDefault_SwapWeapon;
         private readonly InputAction m_PlayerDefault_LookY;
         private readonly InputAction m_PlayerDefault_LookX;
+        private readonly InputAction m_PlayerDefault_SwapWeaponFire;
         public struct PlayerDefaultActions
         {
             private @PlayerController m_Wrapper;
@@ -439,6 +461,7 @@ namespace PlayerSettings
             public InputAction @SwapWeapon => m_Wrapper.m_PlayerDefault_SwapWeapon;
             public InputAction @LookY => m_Wrapper.m_PlayerDefault_LookY;
             public InputAction @LookX => m_Wrapper.m_PlayerDefault_LookX;
+            public InputAction @SwapWeaponFire => m_Wrapper.m_PlayerDefault_SwapWeaponFire;
             public InputActionMap Get() { return m_Wrapper.m_PlayerDefault; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -472,6 +495,9 @@ namespace PlayerSettings
                 @LookX.started += instance.OnLookX;
                 @LookX.performed += instance.OnLookX;
                 @LookX.canceled += instance.OnLookX;
+                @SwapWeaponFire.started += instance.OnSwapWeaponFire;
+                @SwapWeaponFire.performed += instance.OnSwapWeaponFire;
+                @SwapWeaponFire.canceled += instance.OnSwapWeaponFire;
             }
 
             private void UnregisterCallbacks(IPlayerDefaultActions instance)
@@ -500,6 +526,9 @@ namespace PlayerSettings
                 @LookX.started -= instance.OnLookX;
                 @LookX.performed -= instance.OnLookX;
                 @LookX.canceled -= instance.OnLookX;
+                @SwapWeaponFire.started -= instance.OnSwapWeaponFire;
+                @SwapWeaponFire.performed -= instance.OnSwapWeaponFire;
+                @SwapWeaponFire.canceled -= instance.OnSwapWeaponFire;
             }
 
             public void RemoveCallbacks(IPlayerDefaultActions instance)
@@ -573,6 +602,7 @@ namespace PlayerSettings
             void OnSwapWeapon(InputAction.CallbackContext context);
             void OnLookY(InputAction.CallbackContext context);
             void OnLookX(InputAction.CallbackContext context);
+            void OnSwapWeaponFire(InputAction.CallbackContext context);
         }
         public interface IPauseMenuActions
         {

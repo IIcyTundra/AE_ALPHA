@@ -64,8 +64,13 @@ public class Weapon_Handler : MonoBehaviour
 
 
     private void Select(int weaponIndex) {
+        
         for (int i = 0; i < Weapons.Length; i++)
+        {
             Weapons[i].gameObject.SetActive(i == weaponIndex);
+
+            Weapons[i].GetComponent<WeaponBase>().enabled = (i == weaponIndex);
+        }
 
         timeSinceLastSwitch = 0f;
 

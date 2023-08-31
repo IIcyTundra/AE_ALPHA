@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Composites;
 
 namespace PlayerSettings
 {
@@ -13,10 +10,8 @@ namespace PlayerSettings
     public class InputReader : ScriptableObject, PlayerController.IPlayerDefaultActions, PlayerController.IPauseMenuActions
     {
         private PlayerController _playerController;
-        int count;
         private void OnEnable()
         {
-            count = 0;
             if (_playerController == null)
             {
                 _playerController = new PlayerController();
@@ -49,8 +44,10 @@ namespace PlayerSettings
 
         //Player Action Buttons
         public event Action JumpEvent;
-        public event Action PrimaryFireEvent;
+        public event Action <float> PrimaryFireStartedEvent;
+        public event Action PrimaryFireEndedEvent;
         public event Action AlternateFireEvent;
+        public event Action SwapWeaponFireEvent;
 
         //Mouse Look
         public event Action<float> LookXEvent;
@@ -84,10 +81,11 @@ namespace PlayerSettings
 
         public void OnPrimaryFire(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
-            {
-                PrimaryFireEvent?.Invoke();
-            }
+            if (context.phase == InputActionPhase.Started)
+                PrimaryFireStartedEvent?.Invoke(context.ReadValue<float>());
+            else if (context.phase == InputActionPhase.Canceled)
+                PrimaryFireEndedEvent?.Invoke();
+
         }
 
         public void OnAlternateFire(InputAction.CallbackContext context)
@@ -100,8 +98,20 @@ namespace PlayerSettings
 
         public void OnSwapWeapon(InputAction.CallbackContext context)
         {
-
+            //if (context.phase == InputActionPhase.Performed)
+            //{
+            //    AlternateFireEvent?.Invoke();
+            //}
         }
+
+        public void OnSwapWeaponFire(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                SwapWeaponFireEvent?.Invoke();
+            }
+        }
+
 
         #endregion
 
@@ -126,7 +136,6 @@ namespace PlayerSettings
                 SetUIMap();
             }
         }
-
 
         #endregion
 

@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Swap Weapon Fire",
+                    "type": "Button",
+                    "id": "fe34ecef-f998-46ea-beb9-c7942ee89498",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -104,7 +113,7 @@
                 {
                     "name": "",
                     "id": "ac823293-082a-4d6e-b187-010a8ddb6a57",
-                    "path": "<Keyboard>/r",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -115,7 +124,7 @@
                 {
                     "name": "",
                     "id": "a9915da1-7530-4ac4-b075-f2501e6cc3b7",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -127,7 +136,7 @@
                     "name": "",
                     "id": "603359de-001b-41f5-8ee0-0208d2d712e8",
                     "path": "<Keyboard>/space",
-                    "interactions": "Press",
+                    "interactions": "Press,Hold",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
@@ -285,6 +294,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LookY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b5cfb8b-df19-4232-bc49-2c0987c44bf2",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swap Weapon Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
